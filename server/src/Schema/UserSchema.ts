@@ -39,8 +39,9 @@ const UserSchema = new Schema({
   },
 
   role: {
+    type: String,
     enum: Object.values(userRoles),
-    required: true,
+    required: false,
   },
 });
 

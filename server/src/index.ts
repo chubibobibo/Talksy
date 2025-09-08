@@ -6,6 +6,7 @@ import type { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import MongoStore from "connect-mongo";
 import session from "express-session";
+import authRoutes from "./routes/authRoutes.js";
 
 interface AppError {
   status: number;
@@ -60,6 +61,13 @@ if (
     })
   );
 }
+
+// app.get("/", (req: Request, res: Response) => {
+//   res.send("Hello world");
+// });
+
+//ROUTES
+app.use("/api/auth", authRoutes);
 
 //PAGE NOT FOUND ERROR HANDLER
 //Cannot use * for paths because it is a named parameter in express 5
