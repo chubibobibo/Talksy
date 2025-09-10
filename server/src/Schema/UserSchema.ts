@@ -1,6 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType } from "mongoose";
 import { Schema } from "mongoose";
 import { userRoles } from "../utils/userRoles.js";
+import passportLocalMongoose from "passport-local-mongoose";
+
+// type UserType = InferSchemaType<typeof UserSchema>;
 
 const UserSchema = new Schema({
   username: {
@@ -45,4 +48,7 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.plugin(passportLocalMongoose);
+
 export const UserModel = mongoose.model("UserModel", UserSchema);
+// export default UserModel;
