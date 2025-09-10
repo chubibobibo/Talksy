@@ -7,10 +7,20 @@ import { StatusCodes } from "http-status-codes";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import authRoutes from "./routes/authRoutes.js";
+import { UserModel } from "./Schema/UserSchema.js";
+import passport from "passport";
 
 interface AppError {
   status: number;
   message: string;
+}
+
+interface UserModelInterface {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 const app = express();
@@ -62,9 +72,13 @@ if (
   );
 }
 
-// app.get("/", (req: Request, res: Response) => {
-//   res.send("Hello world");
-// });
+// Setting up passport and passport local mongoose
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(UserModel.createStrategy());
+passport.serializeUser(UserModel.serializeUser());
+passport.deserializeUser(UserModel.deserializeUser());
 
 //ROUTES
 app.use("/api/auth", authRoutes);
