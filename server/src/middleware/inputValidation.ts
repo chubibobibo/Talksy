@@ -1,12 +1,13 @@
 import { body, param, query, validationResult } from "express-validator";
 import type { ValidationChain } from "express-validator";
-import type { NextFunction } from "express";
+// import type { NextFunction } from "express";
 import { ExpressError } from "../ExpressError/ExpressErrorHandler.js";
 import { StatusCodes } from "http-status-codes";
 import { UserModel } from "../Schema/UserSchema.js";
+import type { Request, Response, NextFunction } from "express";
 
 //create a function that will handle the error
-//This function will accept an array (validateValues) of valeus to be validated.
+//This function will accept an array (validateValues) of values to be validated.
 //then this function will return the array we passed as an argument and an error response
 const withValidationErrors = (validateValues: ValidationChain[]) => {
   return [
@@ -40,4 +41,34 @@ export const registerValidation = withValidationErrors([
         );
       }
     }),
+
+  body("firstName")
+    .notEmpty()
+    .withMessage("First Name cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("First Name should at least be 4 characters"),
+  body("lastName")
+    .notEmpty()
+    .withMessage("Last Name cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("Last Name should at least be 4 characters"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email cannot be empty")
+    .isEmail()
+    .withMessage("Email must be valid")
+    .custom(async (email) => {
+      const foundEmail = await UserModel.findOne({ email: email });
+      if (foundEmail) {
+        throw new ExpressError(
+          "Email is already used",
+          StatusCodes.BAD_REQUEST
+        );
+      }
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("Password cannot be empty")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters"),
 ]);
