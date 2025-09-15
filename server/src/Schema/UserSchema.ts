@@ -26,10 +26,11 @@ const UserSchema = new Schema({
     required: true,
   },
 
-  password: {
-    type: String,
-    required: true,
-  },
+  // Do not include passwords. PassportJS handles the creation of passwords
+  //   password: {
+  //     type: String,
+  //     required: true,
+  //   },
 
   photoUrl: {
     type: String,
