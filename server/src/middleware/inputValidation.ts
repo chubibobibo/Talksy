@@ -26,6 +26,7 @@ const withValidationErrors = (validateValues: ValidationChain[]) => {
   ];
 };
 
+// Input validations for register
 export const registerValidation = withValidationErrors([
   body("username")
     .notEmpty()
@@ -71,4 +72,63 @@ export const registerValidation = withValidationErrors([
     .withMessage("Password cannot be empty")
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters"),
+]);
+
+// Input validation for login
+
+export const loginValidation = withValidationErrors([
+  body("username")
+    .notEmpty()
+    .withMessage("Username cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("Username must be at least 4 characters"),
+  body("password")
+    .notEmpty()
+    .withMessage("Password cannot be empty")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters"),
+]);
+
+// Input validation for update user
+export const updateUserValidation = withValidationErrors([
+  body("username")
+    .notEmpty()
+    .withMessage("Username cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("Username must be at least 4 characters.")
+    .custom(async (username, { req }) => {
+      const foundUser = await UserModel.findOne({ username });
+      const loggedUser = await UserModel.findById(req.params?.id);
+      if (foundUser && loggedUser.username != req.body.username) {
+        throw new ExpressError(
+          "Username is already taken, try another one",
+          StatusCodes.BAD_REQUEST
+        );
+      }
+    }),
+  body("firstName")
+    .notEmpty()
+    .withMessage("First Name cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("First Name should at least be 4 characters"),
+  body("lastName")
+    .notEmpty()
+    .withMessage("Last Name cannot be empty")
+    .isLength({ min: 4 })
+    .withMessage("Last Name should at least be 4 characters"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email cannot be empty")
+    .isEmail()
+    .withMessage("Email must be valid")
+    .custom(async (email, { req }) => {
+      const foundEmail = await UserModel.findOne({ email: email });
+      const loggedUserEmail = await UserModel.findById(req.params?.id);
+      if (foundEmail && loggedUserEmail.email !== req.body.email) {
+        throw new ExpressError(
+          "Email is already used",
+          StatusCodes.BAD_REQUEST
+        );
+      }
+    }),
 ]);
