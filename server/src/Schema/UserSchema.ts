@@ -1,48 +1,58 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType } from "mongoose";
 import { Schema } from "mongoose";
 import { userRoles } from "../utils/userRoles.js";
+import passportLocalMongoose from "passport-local-mongoose";
 
-const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-  },
+// type UserType = InferSchemaType<typeof UserSchema>;
 
-  firstName: {
-    type: String,
-    required: true,
-  },
+const UserSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+    },
 
-  lastName: {
-    type: String,
-    required: true,
-  },
+    firstName: {
+      type: String,
+      required: true,
+    },
 
-  email: {
-    type: String,
-    required: true,
-  },
+    lastName: {
+      type: String,
+      required: true,
+    },
 
-  password: {
-    type: String,
-    required: true,
-  },
+    email: {
+      type: String,
+      required: true,
+    },
 
-  photoUrl: {
-    type: String,
-    required: false,
-  },
+    // Do not include passwords. PassportJS handles the creation of passwords
+    //   password: {
+    //     type: String,
+    //     required: true,
+    //   },
 
-  photoId: {
-    type: String,
-    required: false,
-  },
+    photoUrl: {
+      type: String,
+      required: false,
+    },
 
-  role: {
-    type: String,
-    enum: Object.values(userRoles),
-    required: false,
+    photoId: {
+      type: String,
+      required: false,
+    },
+
+    role: {
+      type: String,
+      enum: Object.values(userRoles),
+      required: false,
+    },
   },
-});
+  { timestamps: true }
+);
+
+UserSchema.plugin(passportLocalMongoose);
 
 export const UserModel = mongoose.model("UserModel", UserSchema);
+// export default UserModel;
