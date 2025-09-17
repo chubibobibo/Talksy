@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --font-rubik: Rubik;
+  --font-poppins: Poppins;
+  --font-start: Press Start 2P;
+  --font-honk: Honk;
+}
