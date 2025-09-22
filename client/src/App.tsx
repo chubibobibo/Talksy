@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // indexed pages
 import { HomepageLayout, LandingPage } from "./utils";
 
+import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -12,6 +14,7 @@ function App() {
         {
           path: "/index",
           element: <LandingPage />,
+          action: registerAction,
         },
       ],
     },
