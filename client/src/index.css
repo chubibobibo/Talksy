@@ -15,6 +15,6 @@
 @layer components {
   /* cards for register and login */
   .auth-card-mobile {
-    @apply card w-9/12 bg-base-100 card-xs shadow-sm flex justify-center;
+    @apply card w-10/12 bg-base-100 card-xs shadow-sm flex justify-center;
   }
 }
