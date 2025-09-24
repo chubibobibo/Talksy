@@ -6,18 +6,20 @@ export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData(); //obtains data from forms
   const pwd1 = formData.get("password1");
   const pwd2 = formData.get("password2");
-  console.log(pwd1, pwd2);
-  if (pwd1 !== pwd2) {
-    toast.error("Passwords are not matching");
-  } else {
-    formData.append("password", pwd1);
-  }
-  const data = Object.fromEntries(formData); //converts data into objects
 
   try {
-    await axios.post("/api/auth/register/", data);
-    toast.success("registered");
-    return redirect("/");
+    // Avoid overload matches by type checking pwd1
+    if (pwd1 !== pwd2) {
+      toast.error("Passwords do not match");
+    } else {
+      if (typeof pwd1 === "string") {
+        formData.append("password", pwd1);
+        const data = Object.fromEntries(formData); //converts data into objects
+        await axios.post("/api/auth/register/", data);
+        toast.success("registered");
+        return redirect("/");
+      }
+    }
   } catch (err) {
     if (isAxiosError(err)) {
       toast.error(
