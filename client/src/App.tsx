@@ -1,7 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // indexed pages
-import { HomepageLayout, LandingPage } from "./utils";
+import { HomepageLayout, LandingPage, RegisterPage } from "./utils";
 
 import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
 
@@ -12,8 +12,8 @@ function App() {
       element: <HomepageLayout />,
       children: [
         {
-          path: "/index",
-          element: <LandingPage />,
+          path: "/register",
+          element: <RegisterPage />,
           action: registerAction,
         },
       ],
