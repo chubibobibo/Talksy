@@ -1,8 +1,24 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
 
 @theme {
-  --font-rubik: Rubik;
-  --font-poppins: Poppins;
-  --font-start: Press Start 2P;
-  --font-honk: Honk;
+  --font-rubik: "Rubik";
+  --font-poppins: "Poppins";
+  --font-start: "Press Start 2P";
+  --font-honk: "Honk";
+}
+
+/* Reusable Styling */
+
+@layer components {
+  /* cards for register and login */
+  .auth-card-mobile {
+    @apply card w-10/12 bg-base-100 card-sm shadow-sm flex justify-center;
+  }
+
+  .auth-card-desktop {
+    @apply md:w-3/12;
+  }
 }
