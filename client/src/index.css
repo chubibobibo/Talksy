@@ -21,4 +21,8 @@
   .auth-card-desktop {
     @apply md:w-3/12;
   }
+
+  .header-text {
+    @apply text-[1.6rem] text-blue-200 font-bold font-start md:text-[4rem];
+  }
 }
