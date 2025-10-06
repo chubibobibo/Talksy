@@ -2,19 +2,18 @@ import { Form } from "react-router-dom";
 import AuthInputComponent from "../components/AuthInputComponent";
 import PwdInputComponent from "../components/PwdInputComponent";
 
-function RegisterPage() {
+function LoginPage() {
   return (
     <>
-      {/* Header logo */}
       <section className='bg-[url(../src/assets/card-logo-1.png)] bg-center bg-cover h-60 flex flex-col items-center md:h-70 md:bg-cover md:bg-center md:bg-[url(../src/assets/chat-bubble-banner.png)]'>
         {/* Header logo */}
         <h1 className='text-md font-start pb-2 text-gray-800 translate-y-10 md:pt-50 md:-translate-y-20 md:text-3xl'>
           Welcome to Talksy
         </h1>
-        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[4rem]'>
+        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[11rem]'>
           <div className='auth-card-mobile auth-card-desktop'>
             <div className='card-body md:flex md:flex-col'>
-              <h2 className='card-title'>Create an account</h2>
+              <h2 className='card-title'>Login to your account</h2>
               {/* inputs */}
               <Form method='POST' className='md:flex md:flex-col'>
                 <section>
@@ -29,49 +28,13 @@ function RegisterPage() {
                 </section>
 
                 <section>
-                  <AuthInputComponent
-                    type={"text"}
-                    placeholder={"First name"}
-                    minLength={4}
-                    maxLength={30}
-                    name={"firstName"}
-                    iconString='user'
-                  />
+                  <PwdInputComponent name='password' />
                 </section>
 
-                <section>
-                  <AuthInputComponent
-                    type={"text"}
-                    placeholder={"Last name"}
-                    minLength={4}
-                    maxLength={30}
-                    name={"lastName"}
-                    iconString='user'
-                  />
-                </section>
-
-                <section>
-                  <AuthInputComponent
-                    type={"email"}
-                    placeholder={"email"}
-                    minLength={4}
-                    maxLength={30}
-                    name={"email"}
-                    iconString='email'
-                  />
-                </section>
-
-                <section>
-                  <PwdInputComponent name='password1' />
-                </section>
-
-                <section>
-                  <PwdInputComponent name='password2' />
-                </section>
                 {/* inputs */}
                 <div className='justify-end card-actions'>
                   <button className='btn btn-primary -mt-2' type='submit'>
-                    Create Account
+                    Login account
                   </button>
                 </div>
               </Form>
@@ -82,4 +45,4 @@ function RegisterPage() {
     </>
   );
 }
-export default RegisterPage;
+export default LoginPage;
