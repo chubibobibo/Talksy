@@ -3,7 +3,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import FormToast from "../components/FormToast";
 
-function PwdInputComponent() {
+interface PwdInputType {
+  name: string;
+}
+
+// @name props used to differentiate 2 different password fields (matching password field when registering)
+function PwdInputComponent({ name }: PwdInputType) {
   /** @toggleVisibility changes pwd field to text and changes icon */
   const handleToggleVisibility = () => {
     setToggleVisibility(!toggleVisibility);
@@ -12,7 +17,7 @@ function PwdInputComponent() {
 
   return (
     <>
-      <label className='input validator  md:w-105'>
+      <label className='input validator md:w-full'>
         <MdKey size={17} color='gray' />
         <input
           type={toggleVisibility ? "text" : "password"}
@@ -22,7 +27,7 @@ function PwdInputComponent() {
           minLength={8}
           maxLength={30}
           title='Must be a valid email address'
-          name='password2'
+          name={name}
         />
         {toggleVisibility ? (
           <FaRegEyeSlash

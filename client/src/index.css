@@ -19,7 +19,7 @@
   }
 
   .auth-card-desktop {
-    @apply md:w-3/12;
+    @apply card md:w-3/12 bg-base-100 card-sm shadow-sm flex justify-center;
   }
 
   .header-text {

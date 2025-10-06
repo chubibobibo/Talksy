@@ -27,7 +27,7 @@ function AuthInputComponent({
   };
   return (
     <>
-      <label className='input validator'>
+      <label className='input validator md:w-full'>
         {/* use props (string) as the key to access the inputIcons object that contains the element to be rendered */}
         {inputIcons[iconString]}
         <input
@@ -39,6 +39,7 @@ function AuthInputComponent({
           maxLength={maxLength}
           title='Only letters, numbers or dash'
           name={name}
+          //   className='md:w-full'
         />
       </label>
       <FormToast
