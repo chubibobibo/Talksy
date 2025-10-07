@@ -3,10 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // indexed pages
 import {
   HomepageLayout,
-  LandingPage,
   RegisterPage,
   ErrorPage,
   LoginPage,
+  DashboardLayout,
+  DashHome,
 } from "./utils";
 
 import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
@@ -20,14 +21,24 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         {
-          path: "/register",
+          path: "register",
           element: <RegisterPage />,
           action: registerAction,
         },
         {
-          path: "/login",
+          path: "login",
           element: <LoginPage />,
           action: loginAction,
+        },
+        {
+          path: "dashboard",
+          element: <DashboardLayout />,
+          children: [
+            {
+              path: "home",
+              element: <DashHome />,
+            },
+          ],
         },
       ],
     },
