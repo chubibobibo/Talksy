@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import NavbarComponent from "../components/NavbarComponent";
+import LoggedUserContextProvider from "../context/loggedUserContextProvider";
 
 function DashboardLayout() {
   return (
     <>
-      <NavbarComponent />
-      <Outlet />
+      <LoggedUserContextProvider>
+        <NavbarComponent />
+        <Outlet />
+      </LoggedUserContextProvider>
     </>
   );
 }

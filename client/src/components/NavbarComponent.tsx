@@ -1,4 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LoggedUserContext } from "../context/loggedUserContext";
+
 function NavbarComponent() {
+  const userData = useContext(LoggedUserContext);
+  console.log(userData);
+  const navigate = useNavigate();
+  const handleNavigateUserProfile = () => {
+    navigate("/dashboard/profile");
+  };
+  console.log(userData);
   return (
     <section className=''>
       <div className='navbar bg-base-100 shadow-sm'>
@@ -30,12 +41,8 @@ function NavbarComponent() {
             >
               <li>
                 <a
-                  //   className='justify-between'
-                  onClick={() =>
-                    (
-                      document.getElementById("my_modal_5") as HTMLDialogElement
-                    ).showModal()
-                  }
+                  className='justify-between'
+                  onClick={handleNavigateUserProfile}
                 >
                   Profile
                   {/* <span className='badge'>New</span> */}
