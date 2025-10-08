@@ -8,6 +8,7 @@ import {
   LoginPage,
   DashboardLayout,
   DashHome,
+  ProfilePage,
 } from "./utils";
 
 import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
@@ -37,6 +38,10 @@ function App() {
             {
               path: "home",
               element: <DashHome />,
+            },
+            {
+              path: "profile",
+              element: <ProfilePage />,
             },
           ],
         },
