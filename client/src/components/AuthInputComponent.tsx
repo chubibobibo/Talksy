@@ -34,12 +34,10 @@ function AuthInputComponent({
           type={type}
           required
           placeholder={placeholder}
-          //   pattern='[A-Za-z][A-Za-z0-9\-]*'
           minLength={minLength}
           maxLength={maxLength}
           title='Only letters, numbers or dash'
           name={name}
-          //   className='md:w-full'
         />
       </label>
       <FormToast

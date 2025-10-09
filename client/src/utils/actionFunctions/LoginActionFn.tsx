@@ -8,7 +8,7 @@ export const action = async ({ request }: { request: Request }) => {
     const data = Object.fromEntries(formData); //converts formData to usable objects
     await axios.post("/api/auth/login", data);
     toast.success("User successfully logged in");
-    return redirect("/");
+    return redirect("/dashboard/home");
   } catch (err) {
     console.log(err);
     if (isAxiosError(err)) {

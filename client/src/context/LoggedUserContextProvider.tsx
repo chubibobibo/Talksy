@@ -2,7 +2,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import { LoggedUserContext } from "./loggedUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 
 function LoggedUserContextProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState(null);
@@ -18,8 +17,6 @@ function LoggedUserContextProvider({ children }: { children: ReactNode }) {
         setUserData(foundLoggedUser.data.loggedUser);
       } catch (err) {
         console.log(err);
-      } finally {
-        setIsLoading(false);
       }
     };
     findLoggedUser();

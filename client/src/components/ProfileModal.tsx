@@ -3,17 +3,6 @@
 function ProfileModal() {
   return (
     <>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {/* <button
-        className='btn'
-        onClick={() =>
-          (
-            document.getElementById("my_modal_5") as HTMLDialogElement
-          ).showModal()
-        }
-      >
-        open modal
-      </button> */}
       <dialog id='my_modal_5' className='modal modal-middle sm:modal-middle '>
         <div className='modal-box'>
           <form method='dialog'>
@@ -26,7 +15,6 @@ function ProfileModal() {
           <p className='py-4'>
             Press ESC key or click the button below to close
           </p>
-          {/* <div className='modal-action'></div> */}
         </div>
       </dialog>
     </>
