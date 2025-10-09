@@ -4,12 +4,10 @@ import { LoggedUserContext } from "../context/loggedUserContext";
 
 function NavbarComponent() {
   const userData = useContext(LoggedUserContext);
-  console.log(userData);
   const navigate = useNavigate();
   const handleNavigateUserProfile = () => {
     navigate("/dashboard/profile");
   };
-  console.log(userData);
   return (
     <section className=''>
       <div className='navbar bg-base-100 shadow-sm'>
