@@ -1,12 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { LoggedUserContext } from "../context/loggedUserContext";
+import { LoggedUserContext } from "../context/LoggedUserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function NavbarComponent() {
-  const userData = useContext(LoggedUserContext);
+  // const userData = useContext(LoggedUserContext);
   const navigate = useNavigate();
+
   const handleNavigateUserProfile = () => {
     navigate("/dashboard/profile");
+  };
+
+  const handleUserLogout = async () => {
+    try {
+      await axios.post("/api/auth/logout");
+      toast.success("User logged out");
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <section className=''>
@@ -50,7 +63,7 @@ function NavbarComponent() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={handleUserLogout}>Logout</a>
               </li>
             </ul>
           </div>

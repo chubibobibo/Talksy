@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { LoggedUserContext } from "./loggedUserContext";
+import { LoggedUserContext } from "./LoggedUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,9 @@ function LoggedUserContextProvider({ children }: { children: ReactNode }) {
       try {
         const foundLoggedUser = await axios.get("/api/auth/getLoggedUser");
         if (!foundLoggedUser) {
-          toast.error("User is not logged in");
+          toast.error("User is not logged in", {
+            toastId: "foundLoggedUserError",
+          });
         }
         // console.log(foundLoggedUser.data.loggedUser);
         setUserData(foundLoggedUser.data.loggedUser);
