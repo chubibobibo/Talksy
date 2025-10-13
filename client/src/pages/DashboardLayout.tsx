@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavbarComponent from "../components/NavbarComponent";
-import LoggedUserContextProvider from "../context/loggedUserContextProvider";
+import LoggedUserContextProvider from "../context/LoggedUserContextProvider";
 import ProtectRoutes from "../utils/ProtectRoutes";
 
 function DashboardLayout() {
