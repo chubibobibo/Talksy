@@ -7,21 +7,21 @@ function ProfilePage() {
   const userData = useContext(LoggedUserContext);
 
   return (
-    <>
-      <div className='card bg-base-100 w-auto shadow-sm mt-2'>
-        <figure>
+    <section className='md:flex md:justify-center md:pt-10'>
+      <div className='card bg-base-100 w-auto shadow-xl mt-2 md:place-items-center md:gap-4 md:w-5/12 md:p-5'>
+        <figure className='md:w-90 md:pt-4'>
           <img
             src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
             alt='Shoes'
           />
         </figure>
         {/* card-body */}
-        <div className='card-body grid grid-cols-2 p-1'>
+        <div className='card-body grid grid-cols-2 p-1 md:w-auto md:flex-row md:flex md:justify-center'>
           {/* Interest-card */}
           <SmallCard
             cardTitle={"Interests"}
             cardBody={
-              "My interests include hiking, basketball, swimming, and photography"
+              "My interests includes biking, hiking, basketball and photography and many more lioke scuba diving"
             }
           />
           {/* Private-message card */}
@@ -31,12 +31,15 @@ function ProfilePage() {
           />
         </div>
         {/* card-body */}
-        <section className='card-body p-1 py-2'>
+        <section className='card-body p-1 py-2 md:w-6/9'>
           {/* about me card */}
           {userData && <HorizontalSpanCard username={userData} />}
         </section>
+        <button className='btn btn-soft btn-info md:w-7/11'>
+          Edit Profile
+        </button>
       </div>
-    </>
+    </section>
   );
 }
 export default ProfilePage;
