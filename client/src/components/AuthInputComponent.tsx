@@ -27,14 +27,13 @@ function AuthInputComponent({
   };
   return (
     <>
-      <label className='input validator md:w-105'>
-        {/* <FaRegUser size={15} color='gray' /> */}
+      <label className='input validator md:w-full'>
+        {/* use props (string) as the key to access the inputIcons object that contains the element to be rendered */}
         {inputIcons[iconString]}
         <input
           type={type}
           required
           placeholder={placeholder}
-          pattern='[A-Za-z][A-Za-z0-9\-]*'
           minLength={minLength}
           maxLength={maxLength}
           title='Only letters, numbers or dash'

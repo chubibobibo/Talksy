@@ -19,6 +19,10 @@
   }
 
   .auth-card-desktop {
-    @apply md:w-3/12;
+    @apply card md:w-3/12 bg-base-100 card-sm shadow-sm flex justify-center;
+  }
+
+  .header-text {
+    @apply text-[1.6rem] text-blue-200 font-bold font-start md:text-[4rem];
   }
 }
