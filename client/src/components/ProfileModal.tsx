@@ -3,7 +3,7 @@
 function ProfileModal() {
   return (
     <>
-      <dialog id='my_modal_5' className='modal modal-middle sm:modal-middle '>
+      <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle '>
         <div className='modal-box'>
           <form method='dialog'>
             {/* if there is a button in form, it will close the modal */}
