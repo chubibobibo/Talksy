@@ -13,6 +13,7 @@ import {
 
 import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
 import { action as loginAction } from "./utils/actionFunctions/LoginActionFn";
+import { action as updateProfileAction } from "./utils/actionFunctions/updateProfileActionFn";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +43,7 @@ function App() {
             {
               path: "profile",
               element: <ProfilePage />,
+              action: updateProfileAction,
             },
           ],
         },
