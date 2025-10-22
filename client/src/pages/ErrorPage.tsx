@@ -29,10 +29,11 @@ function ErrorPage() {
           </button>
         </section>
       ) : (
-        <section>
-          <p>Something went wrong</p>
-          <p>
-            {error.status} - {error.message}
+        <section className='flex flex-col justify-center items-center w-screen'>
+          <img src='../../src/assets/somethingwnetwrong.png' alt='' />
+          <p className='font-start header-text'>{error.status}</p>
+          <p className='font-start header-text text-base md:text-3xl'>
+            Something went wrong
           </p>
         </section>
       )}
