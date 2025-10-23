@@ -5,6 +5,7 @@ import FormToast from "../components/FormToast";
 
 interface PwdInputType {
   name: string;
+  // defaultPwd: string;
 }
 
 // @name props used to differentiate 2 different password fields (matching password field when registering)
@@ -28,6 +29,7 @@ function PwdInputComponent({ name }: PwdInputType) {
           maxLength={30}
           title='Must be a valid email address'
           name={name}
+          // defaultValue={defaultPwd}
         />
         {toggleVisibility ? (
           <FaRegEyeSlash

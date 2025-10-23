@@ -9,6 +9,7 @@ interface AuthInputTypes {
   maxLength: number;
   name: string;
   iconString: "user" | "email" | "password"; // type should be related to the object keys that it will be used into (inputIcons). react elements cannot be used as keys
+  defaultText: string;
 }
 
 function AuthInputComponent({
@@ -18,6 +19,7 @@ function AuthInputComponent({
   maxLength,
   name,
   iconString,
+  defaultText,
 }: AuthInputTypes) {
   // Object used to select icons for each input
   const inputIcons = {
@@ -38,6 +40,7 @@ function AuthInputComponent({
           maxLength={maxLength}
           title='Only letters, numbers or dash'
           name={name}
+          defaultValue={defaultText}
         />
       </label>
       <FormToast

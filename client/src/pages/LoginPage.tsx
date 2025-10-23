@@ -24,6 +24,7 @@ function LoginPage() {
                     maxLength={30}
                     name={"username"}
                     iconString='user'
+                    defaultText=''
                   />
                 </section>
 
