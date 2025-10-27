@@ -1,9 +1,9 @@
 import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
-import { redirect } from "react-router-dom";
 
 export const action = async ({ request }: { request: Request }) => {
   /** @profileId name given to the submit button that allows to send profileId as payload*/
+  /** @refreshPage function to refresh current page after profile update is successful*/
 
   const formData = await request.formData(); // obtains form data
   const profileId = formData.get("profileId");

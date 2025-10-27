@@ -18,7 +18,7 @@ function ProfileModal() {
               ✕
             </button>
           </form>
-          <h3 className='font-bold text-lg'>Hello!</h3>
+          <h3 className='font-bold text-lg mb-2'>Update Profile</h3>
           {/* <p className='py-4'>
             Press ESC key or click the button below to close
           </p> */}
@@ -63,8 +63,11 @@ function ProfileModal() {
               defaultText={userData?.email || ""} //tells ts that defaultText should be always string
             />
 
-            <PwdInputComponent name='password1' />
-            <PwdInputComponent name='password2' />
+            <PwdInputComponent name='password1' placeholderText='Password' />
+            <PwdInputComponent
+              name='password2'
+              placeholderText='Re-enter your password'
+            />
 
             {/* <fieldset className='fieldset'>
               <legend className='fieldset-legend'>
