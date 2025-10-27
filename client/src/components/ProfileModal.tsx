@@ -2,10 +2,12 @@
 import { Form } from "react-router-dom";
 import { useContext } from "react";
 import { LoggedUserContext } from "../context/LoggedUserContext";
+import AuthInputComponent from "./AuthInputComponent";
+import PwdInputComponent from "./PwdInputComponent";
 
 function ProfileModal() {
   const userData = useContext(LoggedUserContext);
-  // console.log(userData);
+  console.log(userData);
   return (
     <>
       <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle '>
@@ -16,12 +18,58 @@ function ProfileModal() {
               ✕
             </button>
           </form>
-          <h3 className='font-bold text-lg'>Hello!</h3>
+          <h3 className='font-bold text-lg mb-2'>Update Profile</h3>
           {/* <p className='py-4'>
             Press ESC key or click the button below to close
           </p> */}
           <Form method='POST'>
-            <fieldset className='fieldset'>
+            <AuthInputComponent
+              type='text'
+              placeholder='Username'
+              minLength={4}
+              maxLength={30}
+              name='username'
+              iconString='user'
+              defaultText={userData?.username || ""} //tells ts that defaultText should be always string
+            />
+
+            <AuthInputComponent
+              type='text'
+              placeholder='First name'
+              minLength={4}
+              maxLength={30}
+              name='firstName'
+              iconString='user'
+              defaultText={userData?.firstName || ""} //tells ts that defaultText should be always string
+            />
+
+            <AuthInputComponent
+              type='text'
+              placeholder='Last name'
+              minLength={4}
+              maxLength={30}
+              name='lastName'
+              iconString='user'
+              defaultText={userData?.lastName || ""} //tells ts that defaultText should be always string
+            />
+
+            <AuthInputComponent
+              type='text'
+              placeholder='Email'
+              minLength={4}
+              maxLength={30}
+              name='email'
+              iconString='email'
+              defaultText={userData?.email || ""} //tells ts that defaultText should be always string
+            />
+
+            <PwdInputComponent name='password1' placeholderText='Password' />
+            <PwdInputComponent
+              name='password2'
+              placeholderText='Re-enter your password'
+            />
+
+            {/* <fieldset className='fieldset'>
               <legend className='fieldset-legend'>
                 What is your username?
               </legend>
@@ -30,6 +78,7 @@ function ProfileModal() {
                 className='input'
                 placeholder='Type here'
                 name='username'
+                defaultValue={userData?.username}
               />
               <p className='label'>Optional</p>
             </fieldset>
@@ -66,7 +115,7 @@ function ProfileModal() {
                 name='email'
               />
               <p className='label'>Optional</p>
-            </fieldset>
+            </fieldset> */}
 
             <button
               className='btn btn-info'
@@ -74,7 +123,7 @@ function ProfileModal() {
               value={userData?._id}
               name='profileId'
             >
-              submit
+              Submit
             </button>
           </Form>
         </div>

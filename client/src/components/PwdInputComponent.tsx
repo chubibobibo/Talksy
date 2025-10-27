@@ -5,10 +5,12 @@ import FormToast from "../components/FormToast";
 
 interface PwdInputType {
   name: string;
+  // defaultPwd: string;
+  placeholderText: string;
 }
 
 // @name props used to differentiate 2 different password fields (matching password field when registering)
-function PwdInputComponent({ name }: PwdInputType) {
+function PwdInputComponent({ name, placeholderText }: PwdInputType) {
   /** @toggleVisibility changes pwd field to text and changes icon */
   const handleToggleVisibility = () => {
     setToggleVisibility(!toggleVisibility);
@@ -22,12 +24,13 @@ function PwdInputComponent({ name }: PwdInputType) {
         <input
           type={toggleVisibility ? "text" : "password"}
           required
-          placeholder='Password'
+          placeholder={placeholderText}
           pattern='[A-Za-z][A-Za-z0-9\-]*'
           minLength={8}
           maxLength={30}
           title='Must be a valid email address'
           name={name}
+          // defaultValue={defaultPwd}
         />
         {toggleVisibility ? (
           <FaRegEyeSlash
