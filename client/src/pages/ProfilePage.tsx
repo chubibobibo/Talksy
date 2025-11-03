@@ -11,12 +11,12 @@ function ProfilePage() {
   // };
 
   return (
-    <section className='md:flex md:justify-center md:pt-10 md:w-screen'>
+    <section className='mb-4 md:flex md:justify-center md:pt-10 md:w-screen'>
       <aside className=''>
         <ProfileModal />
       </aside>
       <div className='card bg-base-100 w-auto shadow-xl mt-2 md:place-items-center md:gap-4 md:w-5/12 md:p-5'>
-        <figure className='md:w-90 md:pt-4'>
+        <figure className='md:w-90 md:pt-4 px-1'>
           <img
             src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
             alt='Shoes'
@@ -46,7 +46,7 @@ function ProfilePage() {
           Edit Profile
         </button> */}
         <button
-          className='btn btn-soft btn-info md:w-7/11'
+          className='btn btn-soft btn-info md:w-7/11 mb-2'
           onClick={() =>
             (
               document?.getElementById("my_modal_1") as HTMLDialogElement | null

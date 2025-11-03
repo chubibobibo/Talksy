@@ -1,4 +1,4 @@
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaBook } from "react-icons/fa";
 import FormToast from "./FormToast";
 import { MdAlternateEmail, MdKey } from "react-icons/md";
 
@@ -26,6 +26,7 @@ function AuthInputComponent({
     user: <FaRegUser size={17} color='gray' />,
     email: <MdAlternateEmail size={17} color='gray' />,
     password: <MdKey size={17} color='gray' />,
+    book: <FaBook size={17} color='gray' />,
   };
   return (
     <>

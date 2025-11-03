@@ -15,7 +15,7 @@ function RegisterPage() {
         <h1 className='text-md font-start pb-2 text-gray-800 translate-y-10 md:pt-50 md:-translate-y-20 md:text-3xl'>
           Welcome to Talksy
         </h1>
-        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[4rem]'>
+        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[10rem] md:pt-[6rem]'>
           <div className='auth-card-mobile auth-card-desktop mb-3'>
             <div className='card-body md:flex md:flex-col items-center'>
               <h2 className='card-title'>Create an account</h2>
@@ -67,6 +67,15 @@ function RegisterPage() {
                     iconString='email'
                     defaultText=''
                   />
+                </section>
+
+                <section>
+                  <label>
+                    <textarea
+                      className='textarea mb-6 resize-none'
+                      placeholder='About Me'
+                    ></textarea>
+                  </label>
                 </section>
 
                 <section>

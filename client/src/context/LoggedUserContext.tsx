@@ -6,6 +6,7 @@ interface LoggedUserDataType {
   lastName: string;
   email: string;
   role: string;
+  aboutMe: string;
   _id: string;
 }
 
