@@ -7,10 +7,6 @@ export const action = async ({ request }: { request: Request }) => {
   const pwd1 = formData.get("password1");
   const pwd2 = formData.get("password2");
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   try {
     // Avoid overload matches by type checking pwd1
     if (pwd1 !== pwd2) {
@@ -19,6 +15,7 @@ export const action = async ({ request }: { request: Request }) => {
       if (typeof pwd1 === "string") {
         formData.append("password", pwd1);
         const data = Object.fromEntries(formData); //converts data into objects
+        await axios.post("/api/auth/logout");
         await axios.post("/api/auth/register/", data);
         toast.success("registered");
         return redirect("/login");

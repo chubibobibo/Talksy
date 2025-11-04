@@ -11,7 +11,7 @@ function ProfilePage() {
   // };
 
   return (
-    <section className='mb-4 md:flex md:justify-center md:pt-10 md:w-screen'>
+    <section className='mb-4 md:flex md:justify-center md:pt-10 md:w-screen mb-6'>
       <aside className=''>
         <ProfileModal />
       </aside>
@@ -38,7 +38,7 @@ function ProfilePage() {
           />
         </div>
         {/* card-body */}
-        <section className='card-body p-1 py-2 md:w-6/9'>
+        <section className='card-body p-1 py-2 md:w-6/9 mb-2'>
           {/* about me card */}
           {userData && <HorizontalSpanCard username={userData} />}
         </section>

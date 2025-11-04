@@ -10,7 +10,7 @@ function ProfileModal() {
   console.log(userData);
   return (
     <>
-      <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle '>
+      <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle'>
         <div className='modal-box'>
           <form method='dialog'>
             {/* if there is a button in form, it will close the modal */}
@@ -62,6 +62,17 @@ function ProfileModal() {
               iconString='email'
               defaultText={userData?.email || ""} //tells ts that defaultText should be always string
             />
+
+            <section>
+              <label>
+                <textarea
+                  className='textarea mb-6 resize-none w-full'
+                  placeholder='About Me'
+                  name='aboutMe'
+                  defaultValue={userData?.aboutMe}
+                ></textarea>
+              </label>
+            </section>
 
             <PwdInputComponent name='password1' placeholderText='Password' />
             <PwdInputComponent
