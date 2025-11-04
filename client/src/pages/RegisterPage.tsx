@@ -74,6 +74,7 @@ function RegisterPage() {
                     <textarea
                       className='textarea mb-6 resize-none'
                       placeholder='About Me'
+                      name='aboutMe'
                     ></textarea>
                   </label>
                 </section>
