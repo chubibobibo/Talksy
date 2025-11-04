@@ -1,8 +1,12 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import AuthInputComponent from "../components/AuthInputComponent";
 import PwdInputComponent from "../components/PwdInputComponent";
 
 function RegisterPage() {
+  const navigate = useNavigate();
+  const navOnClick = () => {
+    navigate("/login");
+  };
   return (
     <>
       {/* Header logo */}
@@ -11,9 +15,9 @@ function RegisterPage() {
         <h1 className='text-md font-start pb-2 text-gray-800 translate-y-10 md:pt-50 md:-translate-y-20 md:text-3xl'>
           Welcome to Talksy
         </h1>
-        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[4rem]'>
-          <div className='auth-card-mobile auth-card-desktop'>
-            <div className='card-body md:flex md:flex-col'>
+        <section className='w-screen h-screen flex flex-col justify-center items-center pt-[10rem] md:pt-[6rem]'>
+          <div className='auth-card-mobile auth-card-desktop mb-3'>
+            <div className='card-body md:flex md:flex-col items-center'>
               <h2 className='card-title'>Create an account</h2>
               {/* inputs */}
               <Form method='POST' className='md:flex md:flex-col'>
@@ -25,6 +29,7 @@ function RegisterPage() {
                     maxLength={30}
                     name={"username"}
                     iconString='user'
+                    defaultText=''
                   />
                 </section>
 
@@ -36,6 +41,7 @@ function RegisterPage() {
                     maxLength={30}
                     name={"firstName"}
                     iconString='user'
+                    defaultText=''
                   />
                 </section>
 
@@ -47,6 +53,7 @@ function RegisterPage() {
                     maxLength={30}
                     name={"lastName"}
                     iconString='user'
+                    defaultText=''
                   />
                 </section>
 
@@ -58,15 +65,32 @@ function RegisterPage() {
                     maxLength={30}
                     name={"email"}
                     iconString='email'
+                    defaultText=''
                   />
                 </section>
 
                 <section>
-                  <PwdInputComponent name='password1' />
+                  <label>
+                    <textarea
+                      className='textarea mb-6 resize-none'
+                      placeholder='About Me'
+                      name='aboutMe'
+                    ></textarea>
+                  </label>
                 </section>
 
                 <section>
-                  <PwdInputComponent name='password2' />
+                  <PwdInputComponent
+                    name='password1'
+                    placeholderText='Password'
+                  />
+                </section>
+
+                <section>
+                  <PwdInputComponent
+                    name='password2'
+                    placeholderText='Re-enter your password'
+                  />
                 </section>
                 {/* inputs */}
                 <div className='justify-end card-actions'>
@@ -75,6 +99,12 @@ function RegisterPage() {
                   </button>
                 </div>
               </Form>
+              <section className='flex flex-col justify-center items-center'>
+                <p>Do you have an account already?</p>
+                <p onClick={navOnClick} className='cursor-pointer'>
+                  Sign In
+                </p>
+              </section>
             </div>
           </div>
         </section>

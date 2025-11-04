@@ -2,14 +2,21 @@ import { useContext } from "react";
 import { LoggedUserContext } from "../context/LoggedUserContext";
 import SmallCard from "../components/SmallCard";
 import HorizontalSpanCard from "../components/HorizontalSpanCard";
+import ProfileModal from "../components/ProfileModal";
 
 function ProfilePage() {
   const userData = useContext(LoggedUserContext);
+  // const handleOpenModal = () => {
+  //   document.getElementById("my_modal_1").showModal();
+  // };
 
   return (
-    <section className='md:flex md:justify-center md:pt-10'>
+    <section className='mb-4 md:flex md:justify-center md:pt-10 md:w-screen mb-6'>
+      <aside className=''>
+        <ProfileModal />
+      </aside>
       <div className='card bg-base-100 w-auto shadow-xl mt-2 md:place-items-center md:gap-4 md:w-5/12 md:p-5'>
-        <figure className='md:w-90 md:pt-4'>
+        <figure className='md:w-90 md:pt-4 px-1'>
           <img
             src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
             alt='Shoes'
@@ -31,11 +38,21 @@ function ProfilePage() {
           />
         </div>
         {/* card-body */}
-        <section className='card-body p-1 py-2 md:w-6/9'>
+        <section className='card-body p-1 py-2 md:w-6/9 mb-2'>
           {/* about me card */}
           {userData && <HorizontalSpanCard username={userData} />}
         </section>
-        <button className='btn btn-soft btn-info md:w-7/11'>
+        {/* <button className='btn btn-soft btn-info md:w-7/11'>
+          Edit Profile
+        </button> */}
+        <button
+          className='btn btn-soft btn-info md:w-7/11 mb-2'
+          onClick={() =>
+            (
+              document?.getElementById("my_modal_1") as HTMLDialogElement | null
+            )?.showModal()
+          }
+        >
           Edit Profile
         </button>
       </div>

@@ -12,7 +12,7 @@ function ProtectRoutes({ children }: { children: ReactNode }) {
       try {
         const loggedUserData = await axios.get("/api/auth/getLoggedUser");
         if (!loggedUserData) {
-          console.log("user not logged in");
+          // console.log("user not logged in");
           toast.error("User is not logged in", {
             toastId: "UnauthorizedError",
           });

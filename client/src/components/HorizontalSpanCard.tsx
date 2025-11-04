@@ -3,6 +3,7 @@ interface NameType {
   firstName: string;
   lastName: string;
   email: string;
+  aboutMe: string;
 }
 
 function HorizontalSpanCard({ username }: { username: NameType }) {
@@ -12,7 +13,9 @@ function HorizontalSpanCard({ username }: { username: NameType }) {
         <div className='card-body'>
           <h2 className='card-title text-poppins md:text-base'>About Me</h2>
           <p className='text-poppins md:text-xs capitalize'>
-            Hello, my name is {username?.username}. Nice to meet you
+            {username?.aboutMe
+              ? username?.aboutMe
+              : `Hello, my name is ${username?.username}. Nice to meet you`}
           </p>
         </div>
       </div>
