@@ -23,14 +23,12 @@ function PwdInputComponent({ name, placeholderText }: PwdInputType) {
         <MdKey size={17} color='gray' />
         <input
           type={toggleVisibility ? "text" : "password"}
-          required
           placeholder={placeholderText}
           pattern='[A-Za-z][A-Za-z0-9\-]*'
-          minLength={8}
+          minLength={8} //
           maxLength={30}
-          title='Must be a valid email address'
+          title='Must be at least 8 characters'
           name={name}
-          // defaultValue={defaultPwd}
         />
         {toggleVisibility ? (
           <FaRegEyeSlash

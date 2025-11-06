@@ -5,9 +5,11 @@ import { LoggedUserContext } from "../context/LoggedUserContext";
 import AuthInputComponent from "./AuthInputComponent";
 import PwdInputComponent from "./PwdInputComponent";
 
+import { ToastContainer, Zoom } from "react-toastify";
+
 function ProfileModal() {
   const userData = useContext(LoggedUserContext);
-  console.log(userData);
+
   return (
     <>
       <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle'>
@@ -79,55 +81,6 @@ function ProfileModal() {
               name='password2'
               placeholderText='Re-enter your password'
             />
-
-            {/* <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your username?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='username'
-                defaultValue={userData?.username}
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your firstname?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='firstName'
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your lasttname?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='lastName'
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>What is your email?</legend>
-              <input
-                type='email'
-                className='input'
-                placeholder='Type here'
-                name='email'
-              />
-              <p className='label'>Optional</p>
-            </fieldset> */}
-
             <button
               className='btn btn-info'
               type='submit'
@@ -138,6 +91,7 @@ function ProfileModal() {
             </button>
           </Form>
         </div>
+        <ToastContainer position='top-center' transition={Zoom} />
       </dialog>
     </>
   );
