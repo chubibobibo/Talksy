@@ -15,7 +15,7 @@ export const action = async ({ request }: { request: Request }) => {
       if (typeof pwd1 === "string") {
         formData.append("password", pwd1);
         const data = Object.fromEntries(formData); //converts data into objects
-        await axios.post("/api/auth/logout");
+        await axios.post("/api/auth/logout"); //logs out the current user before registering
         await axios.post("/api/auth/register/", data);
         toast.success("registered");
         return redirect("/login");
