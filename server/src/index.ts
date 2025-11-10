@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -9,6 +9,8 @@ import session from "express-session";
 import authRoutes from "./routes/authRoutes.js";
 import { UserModel } from "./Schema/UserSchema.js";
 import passport from "passport";
+
+import {v2 as cloudinary} from cloudinary
 
 interface AppError {
   status: number;
@@ -28,6 +30,8 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(cors());
+app.use(urlencoded({extended: true})) //parses data from forms and turn it into JS objects
+app.use(express.static('./public')) //makes files in a folder publicly accessible over HTTP.
 
 //DB connection
 main().catch((err) => console.log(err));
@@ -38,6 +42,15 @@ async function main() {
     console.log("Connected to DB");
   }
 }
+
+//configure cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API,
+  api_secret: process.env.CLOUD_SECRET,
+  secure: true
+
+})
 
 //express sessions store
 //manual type check for process.env

@@ -6,6 +6,7 @@ import {
   loginUser,
   logoutUser,
   updateUser,
+  getLoggedUser,
 } from "../controllers/authControllers.js";
 import passport from "passport";
 import { rateLimit } from "express-rate-limit";
@@ -26,6 +27,9 @@ const loginLimiter = rateLimit({
   ipv6Subnet: 56, // Set to 60 or 64 to be less aggressive, or 52 or 48 to be more aggressive
   message: "Too many attempts to login, Try again in 10 minutes",
 });
+
+// Get logged user
+router.get("/getLoggedUser", getLoggedUser);
 
 // Register route
 router.post("/register", registerValidation, registerUser);
