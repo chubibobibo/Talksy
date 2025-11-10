@@ -89,3 +89,17 @@ export const updateUser = async (req: Request, res: Response) => {
   }
   res.status(StatusCodes.OK).json({ message: "Successfully updated user" });
 };
+
+//Obtain logged user data
+export const getLoggedUser = async (req: Request, res: Response) => {
+  // const { id } = req.params;
+  if (!req.user) {
+    throw new ExpressError("User not logged in", StatusCodes.UNAUTHORIZED);
+  }
+  const userData = req.user;
+  const loggedUser = await UserModel.findOne(userData);
+  if (!loggedUser) {
+    throw new ExpressError("User is not logged in", StatusCodes.UNAUTHORIZED);
+  }
+  res.status(StatusCodes.OK).json({ message: "logged user", loggedUser });
+};

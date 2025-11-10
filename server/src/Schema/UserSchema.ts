@@ -43,6 +43,10 @@ const UserSchema = new Schema(
       required: false,
     },
 
+    aboutMe: {
+      type: String,
+    },
+
     role: {
       type: String,
       enum: Object.values(userRoles),
