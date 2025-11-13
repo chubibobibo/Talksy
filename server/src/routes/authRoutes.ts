@@ -12,6 +12,8 @@ import passport from "passport";
 import { rateLimit } from "express-rate-limit";
 const router = express.Router();
 
+import upload from "../middleware/multerMiddleware.js";
+
 import {
   registerValidation,
   loginValidation,
@@ -68,6 +70,11 @@ router.post(
 router.post("/logout", logoutUser);
 
 // Update user route
-router.patch("/update/:id", updateUserValidation, updateUser);
+router.patch(
+  "/update/:id",
+  upload.single("photoUrl"),
+  updateUserValidation,
+  updateUser
+);
 
 export default router;
