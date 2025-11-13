@@ -10,7 +10,7 @@ import authRoutes from "./routes/authRoutes.js";
 import { UserModel } from "./Schema/UserSchema.js";
 import passport from "passport";
 
-import {v2 as cloudinary} from cloudinary
+import { v2 as cloudinary } from "cloudinary";
 
 interface AppError {
   status: number;
@@ -23,6 +23,7 @@ interface UserModelInterface {
   lastName: string;
   email: string;
   password: string;
+  _id: string;
 }
 
 const app = express();
@@ -30,8 +31,8 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(cors());
-app.use(urlencoded({extended: true})) //parses data from forms and turn it into JS objects
-app.use(express.static('./public')) //makes files in a folder publicly accessible over HTTP.
+app.use(urlencoded({ extended: true })); //parses data from forms and turn it into JS objects
+app.use(express.static("./src/public")); //makes files in a folder publicly accessible over HTTP.
 
 //DB connection
 main().catch((err) => console.log(err));
@@ -39,18 +40,23 @@ async function main() {
   //   await mongoose.connect(process.env.MONGO_URL as string);
   if (typeof process.env.MONGO_URL === "string") {
     await mongoose.connect(process.env.MONGO_URL);
-    console.log("Connected to DB");
+    console.log("Connected to DB..yeehaw");
   }
 }
 
 //configure cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API,
-  api_secret: process.env.CLOUD_SECRET,
-  secure: true
-
-})
+if (
+  typeof process.env.CLOUD_NAME === "string" &&
+  typeof process.env.CLOUD_API === "string" &&
+  typeof process.env.CLOUD_SECRET === "string"
+) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API,
+    api_secret: process.env.CLOUD_SECRET,
+    secure: true,
+  });
+}
 
 //express sessions store
 //manual type check for process.env
