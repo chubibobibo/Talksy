@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 function NavbarComponent() {
   // const userData = useContext(LoggedUserContext);
   const navigate = useNavigate();
+  const userData = useContext(LoggedUserContext);
 
   const closeLink = () => {
     const closeDialog = document?.activeElement as HTMLElement; // casts active element as HTML element to prevent errors when using .blur()
@@ -31,7 +32,10 @@ function NavbarComponent() {
     <section>
       <div className='navbar bg-base-100 shadow-sm'>
         <div className='flex-1'>
-          <a className='btn btn-ghost text-xl font-start pl-0 text text-blue-400'>
+          <a
+            className='btn btn-ghost text-xl font-start pl-0 text text-blue-400'
+            onClick={() => navigate("/dashboard/home")}
+          >
             Talksy
           </a>
         </div>
@@ -47,10 +51,11 @@ function NavbarComponent() {
               role='button'
               className='btn btn-ghost btn-circle avatar'
             >
-              <div className='w-10 rounded-full'>
+              <div className='w-10 rounded-fit'>
                 <img
-                  alt='Tailwind CSS Navbar component'
-                  src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+                  alt='user-avatar'
+                  src={userData?.photoUrl}
+                  className='object-top-right '
                 />
               </div>
             </div>

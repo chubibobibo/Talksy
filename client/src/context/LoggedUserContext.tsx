@@ -8,6 +8,7 @@ interface LoggedUserDataType {
   role: string;
   aboutMe: string;
   _id: string;
+  photoUrl: string;
 }
 
 export const LoggedUserContext = createContext<LoggedUserDataType | null>(null);

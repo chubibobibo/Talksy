@@ -4,11 +4,14 @@ import { useContext } from "react";
 import { LoggedUserContext } from "../context/LoggedUserContext";
 import AuthInputComponent from "./AuthInputComponent";
 import PwdInputComponent from "./PwdInputComponent";
+import { useNavigation } from "react-router-dom";
 
 import { ToastContainer, Zoom } from "react-toastify";
 
 function ProfileModal() {
   const userData = useContext(LoggedUserContext);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   return (
     <>
@@ -24,7 +27,9 @@ function ProfileModal() {
           {/* <p className='py-4'>
             Press ESC key or click the button below to close
           </p> */}
-          <Form method='POST'>
+          <Form method='POST' encType='multipart/form-data'>
+            <input type='file' className='file-input' name='photoUrl' />
+
             <AuthInputComponent
               type='text'
               placeholder='Username'
@@ -86,8 +91,16 @@ function ProfileModal() {
               type='submit'
               value={userData?._id}
               name='profileId'
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? (
+                <>
+                  <span>Updating Profile</span>
+                  <span className='loading loading-dots loading-xs'></span>
+                </>
+              ) : (
+                "Update"
+              )}
             </button>
           </Form>
         </div>
