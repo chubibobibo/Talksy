@@ -4,10 +4,15 @@ import { useContext } from "react";
 import { LoggedUserContext } from "../context/LoggedUserContext";
 import AuthInputComponent from "./AuthInputComponent";
 import PwdInputComponent from "./PwdInputComponent";
+import { useNavigation } from "react-router-dom";
+
+import { ToastContainer, Zoom } from "react-toastify";
 
 function ProfileModal() {
   const userData = useContext(LoggedUserContext);
-  console.log(userData);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <>
       <dialog id='my_modal_1' className='modal modal-middle sm:modal-middle'>
@@ -22,7 +27,14 @@ function ProfileModal() {
           {/* <p className='py-4'>
             Press ESC key or click the button below to close
           </p> */}
-          <Form method='POST'>
+          <Form method='POST' encType='multipart/form-data'>
+            <p className='font-semibold'>Choose your avatar</p>
+            <input
+              type='file'
+              className='file-input mb-6 w-full'
+              name='photoUrl'
+            />
+
             <AuthInputComponent
               type='text'
               placeholder='Username'
@@ -79,65 +91,25 @@ function ProfileModal() {
               name='password2'
               placeholderText='Re-enter your password'
             />
-
-            {/* <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your username?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='username'
-                defaultValue={userData?.username}
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your firstname?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='firstName'
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>
-                What is your lasttname?
-              </legend>
-              <input
-                type='text'
-                className='input'
-                placeholder='Type here'
-                name='lastName'
-              />
-              <p className='label'>Optional</p>
-            </fieldset>
-            <fieldset className='fieldset'>
-              <legend className='fieldset-legend'>What is your email?</legend>
-              <input
-                type='email'
-                className='input'
-                placeholder='Type here'
-                name='email'
-              />
-              <p className='label'>Optional</p>
-            </fieldset> */}
-
             <button
               className='btn btn-info'
               type='submit'
               value={userData?._id}
               name='profileId'
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? (
+                <>
+                  <span>Updating Profile</span>
+                  <span className='loading loading-dots loading-xs'></span>
+                </>
+              ) : (
+                "Update"
+              )}
             </button>
           </Form>
         </div>
+        <ToastContainer position='top-center' transition={Zoom} />
       </dialog>
     </>
   );

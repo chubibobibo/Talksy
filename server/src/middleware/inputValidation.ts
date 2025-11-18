@@ -90,6 +90,7 @@ export const loginValidation = withValidationErrors([
 ]);
 
 // Input validation for update user
+// compare logged user's email and username to the req.body to allow unchanged username and email in the update request
 export const updateUserValidation = withValidationErrors([
   body("username")
     .notEmpty()
@@ -98,7 +99,9 @@ export const updateUserValidation = withValidationErrors([
     .withMessage("Username must be at least 4 characters.")
     .custom(async (username, { req }) => {
       const foundUser = await UserModel.findOne({ username });
-      const loggedUser = await UserModel.findById(req.params?.id);
+      const loggedUser = await UserModel.findById(req.user._id);
+      // console.log(req.user);
+      // console.log(req?.params?.id);
       if (foundUser && loggedUser.username != req.body.username) {
         throw new ExpressError(
           "Username is already taken, try another one",
@@ -123,7 +126,8 @@ export const updateUserValidation = withValidationErrors([
     .withMessage("Email must be valid")
     .custom(async (email, { req }) => {
       const foundEmail = await UserModel.findOne({ email: email });
-      const loggedUserEmail = await UserModel.findById(req.params?.id);
+      const loggedUserEmail = await UserModel.findById(req.user._id);
+      // console.log(req.params)
       if (foundEmail && loggedUserEmail.email !== req.body.email) {
         throw new ExpressError(
           "Email is already used",
@@ -131,4 +135,12 @@ export const updateUserValidation = withValidationErrors([
         );
       }
     }),
+  body("password").custom(async ({ req }) => {
+    if (req?.body?.password.length < 8) {
+      throw new ExpressError(
+        "Password must be at least 8 characters, check again",
+        StatusCodes.BAD_REQUEST
+      );
+    }
+  }),
 ]);

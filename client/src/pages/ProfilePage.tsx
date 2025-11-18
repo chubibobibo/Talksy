@@ -3,6 +3,7 @@ import { LoggedUserContext } from "../context/LoggedUserContext";
 import SmallCard from "../components/SmallCard";
 import HorizontalSpanCard from "../components/HorizontalSpanCard";
 import ProfileModal from "../components/ProfileModal";
+import { ToastContainer, Zoom } from "react-toastify";
 
 function ProfilePage() {
   const userData = useContext(LoggedUserContext);
@@ -17,10 +18,7 @@ function ProfilePage() {
       </aside>
       <div className='card bg-base-100 w-auto shadow-xl mt-2 md:place-items-center md:gap-4 md:w-5/12 md:p-5'>
         <figure className='md:w-90 md:pt-4 px-1'>
-          <img
-            src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
-            alt='Shoes'
-          />
+          <img src={userData?.photoUrl} alt='user-avatar' />
         </figure>
         {/* card-body */}
         <div className='card-body grid grid-cols-2 p-1 md:w-auto md:flex-row md:flex md:justify-center'>
@@ -56,6 +54,7 @@ function ProfilePage() {
           Edit Profile
         </button>
       </div>
+      <ToastContainer position='top-center' transition={Zoom} />
     </section>
   );
 }

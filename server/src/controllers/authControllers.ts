@@ -2,6 +2,17 @@ import type { NextFunction, Request, Response } from "express";
 import { ExpressError } from "../ExpressError/ExpressErrorHandler.js";
 import { StatusCodes } from "http-status-codes";
 import { UserModel } from "../Schema/UserSchema.js";
+import cloudinary from "cloudinary";
+import { promises as fs } from "fs";
+
+interface UserModelInterface {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  _id: string;
+}
 
 // REGISTERING A USER
 export const registerUser = async (req: Request, res: Response) => {
@@ -70,22 +81,57 @@ export const logoutUser = async (
 
 // UPDATE A USER
 export const updateUser = async (req: Request, res: Response) => {
-  if (!req.body) {
-    throw new ExpressError("No date received", StatusCodes.BAD_REQUEST);
-  }
   const { id } = req.params;
-  const foundUser = await UserModel.findById(id);
-  if (!foundUser) {
-    throw new ExpressError("No user found with that id", StatusCodes.NOT_FOUND);
-  }
-  const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
-    new: true,
-  });
-  if (!updatedUser) {
-    throw new ExpressError(
-      `There is a problem updating user ${foundUser.username}`,
-      StatusCodes.INTERNAL_SERVER_ERROR
+  try {
+    if (!req.body) {
+      throw new ExpressError("No data received", StatusCodes.BAD_REQUEST);
+    }
+    const foundUser = await UserModel.findById(id);
+    if (!foundUser) {
+      throw new ExpressError("User cannot be found", StatusCodes.NOT_FOUND);
+    }
+
+    //delete previous uploaded photo when updating avatar
+    if (foundUser.photoId) {
+      await cloudinary.v2.uploader.destroy(foundUser.photoId);
+    }
+    // check req.file from multer and use cloudinary api to upload image
+    if (req.file) {
+      const response = await cloudinary.v2.uploader.upload(req.file.path, {
+        folder: "talksy",
+        quality: 70,
+      });
+      await fs.unlink(req.file.path); // delete image in the public/uploads folder
+      req.body.photoUrl = response.secure_url;
+      req.body.photoId = response.public_id;
+    }
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      foundUser._id,
+      req.body,
+      { new: true }
     );
+    if (!updatedUser) {
+      throw new ExpressError(
+        "Problem updating user",
+        StatusCodes.INTERNAL_SERVER_ERROR
+      );
+    }
+  } catch (err) {
+    console.log(err);
   }
-  res.status(StatusCodes.OK).json({ message: "Successfully updated user" });
+  res.status(StatusCodes.OK).json({ message: "User updated" });
+};
+
+//Obtain logged user data
+export const getLoggedUser = async (req: Request, res: Response) => {
+  // const { id } = req.params;
+  if (!req.user) {
+    throw new ExpressError("User not logged in", StatusCodes.UNAUTHORIZED);
+  }
+  const userData = req.user;
+  const loggedUser = await UserModel.findOne(userData);
+  if (!loggedUser) {
+    throw new ExpressError("User is not logged in", StatusCodes.UNAUTHORIZED);
+  }
+  res.status(StatusCodes.OK).json({ message: "logged user", loggedUser });
 };
