@@ -28,7 +28,12 @@ function ProfileModal() {
             Press ESC key or click the button below to close
           </p> */}
           <Form method='POST' encType='multipart/form-data'>
-            <input type='file' className='file-input' name='photoUrl' />
+            <p className='font-semibold'>Choose your avatar</p>
+            <input
+              type='file'
+              className='file-input mb-6 w-full'
+              name='photoUrl'
+            />
 
             <AuthInputComponent
               type='text'

@@ -19,7 +19,7 @@ export const action = async ({ request }: { request: Request }) => {
     toast.error("passwords do not match");
   } else {
     formData.append("password", pwd1 ? pwd1 : "");
-    // const data = Object.fromEntries(formData); // converts form data to objects
+    //skip transforming formData into objects. multer handles it.
     try {
       await axios.patch(`/api/auth/update/${profileId}`, formData);
       toast.success("successfully updated user profile");
