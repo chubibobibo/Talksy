@@ -43,20 +43,12 @@ export const registerUser = async (req: Request, res: Response) => {
 
     await registeredUser.setPassword(password);
     await registeredUser.save();
-    const msg = mailSender(
-      registeredUser.email.toString(),
-      registeredUser.username.toString(),
+    mailSender(
+      registeredUser.email,
       "lesterabao@gmail.com",
-      "Welcome to TALKSY"
+      "Welcome to TALKSY",
+      registeredUser.username
     );
-    sgMail
-      .send(msg)
-      .then(() => {
-        console.log("Email sent");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
     res
       .status(StatusCodes.OK)
