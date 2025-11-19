@@ -1,23 +1,34 @@
-import sgMail from "@sendgrid/mail";
+import Mailgun from "mailgun.js";
 import dotenv from "dotenv";
 import { createWelcomeEmailTemplate } from "./welcomeEmail.js";
 dotenv.config();
-if (process.env.TWILIO_API) {
-  sgMail.setApiKey(process.env.TWILIO_API);
-}
 
-export const mailSender = (
+export const mailSender = async (
   dest: string,
-  destName: string,
   sender: string,
-  subject: string
+  subject: string,
+  name: string
 ) => {
-  const msg = {
-    to: dest, // Change to your recipient
-    from: sender, // Change to your verified sender
-    subject: subject,
-    text: "and easy to do anywhere, even with Node.js",
-    html: createWelcomeEmailTemplate(destName, "http://localhost:5173/login"),
-  };
-  return msg;
+  const mailgun = new Mailgun(FormData);
+  const mg = mailgun.client({
+    username: "api",
+    key: process.env.MAILGUN_API || "API_KEY",
+    // When you have an EU-domain, you must specify the endpoint:
+    // url: "https://api.eu.mailgun.net"
+  });
+  try {
+    const data = await mg.messages.create(
+      "sandboxe08ba2ff8de34d639b971225b8f6ac64.mailgun.org",
+      {
+        from: sender,
+        to: [dest],
+        subject: subject,
+        text: "Congratulations chubibobibo, you just sent an email with Mailgun! You are truly awesome!",
+        html: createWelcomeEmailTemplate(name, "http://localhost:5173/login"),
+      }
+    );
+    console.log(data); // logs response data
+  } catch (error) {
+    console.log(error); //logs any error
+  }
 };
