@@ -4,6 +4,15 @@ import { StatusCodes } from "http-status-codes";
 import { UserModel } from "../Schema/UserSchema.js";
 import cloudinary from "cloudinary";
 import { promises as fs } from "fs";
+import { mailSender } from "../utils/emailSender.js";
+
+import sgMail from "@sendgrid/mail";
+// import dotenv from "dotenv";
+// import { createWelcomeEmailTemplate } from "./welcomeEmail.js";
+// dotenv.config();
+// if (process.env.TWILIO_API) {
+//   sgMail.setApiKey(process.env.TWILIO_API);
+// }
 
 interface UserModelInterface {
   username: string;
@@ -34,6 +43,12 @@ export const registerUser = async (req: Request, res: Response) => {
 
     await registeredUser.setPassword(password);
     await registeredUser.save();
+    mailSender(
+      registeredUser.email,
+      "lesterabao@gmail.com",
+      "Welcome to TALKSY",
+      registeredUser.username
+    );
 
     res
       .status(StatusCodes.OK)
