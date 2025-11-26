@@ -18,7 +18,7 @@ export const action = async ({ request }: { request: Request }) => {
         await axios.post("/api/auth/logout"); //logs out the current user before registering
         await axios.post("/api/auth/register/", data);
         toast.success("registered");
-        return redirect("/login");
+        return redirect("/welcome-user");
       }
     }
   } catch (err) {
