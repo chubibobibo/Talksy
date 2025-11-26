@@ -5,3 +5,4 @@ export { default as LoginPage } from "../pages/LoginPage";
 export { default as DashboardLayout } from "../pages/DashboardLayout";
 export { default as DashHome } from "../pages/DashHome";
 export { default as ProfilePage } from "../pages/ProfilePage";
+export { default as WelcomeNewUserPage } from "../pages/WelcomeNewUser";

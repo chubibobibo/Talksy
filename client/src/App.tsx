@@ -9,11 +9,13 @@ import {
   DashboardLayout,
   DashHome,
   ProfilePage,
+  WelcomeNewUserPage,
 } from "./utils";
 
 import { action as registerAction } from "./utils/actionFunctions/registerActionFn";
 import { action as loginAction } from "./utils/actionFunctions/LoginActionFn";
 import { action as updateProfileAction } from "./utils/actionFunctions/updateProfileActionFn";
+import { loader as loaderUserData } from "./utils/loaderFunctions/profilePageLoader";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +35,10 @@ function App() {
           action: loginAction,
         },
         {
+          path: "welcome-user",
+          element: <WelcomeNewUserPage />,
+        },
+        {
           path: "dashboard",
           element: <DashboardLayout />,
           children: [
@@ -41,8 +47,9 @@ function App() {
               element: <DashHome />,
             },
             {
-              path: "profile",
+              path: "profile/:id",
               element: <ProfilePage />,
+              loader: loaderUserData,
               action: updateProfileAction,
             },
           ],

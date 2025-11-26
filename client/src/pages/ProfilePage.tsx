@@ -4,12 +4,17 @@ import SmallCard from "../components/SmallCard";
 import HorizontalSpanCard from "../components/HorizontalSpanCard";
 import ProfileModal from "../components/ProfileModal";
 import { ToastContainer, Zoom } from "react-toastify";
+import { useLoaderData } from "react-router-dom";
 
 function ProfilePage() {
-  const userData = useContext(LoggedUserContext);
+  // const userData = useContext(LoggedUserContext);
   // const handleOpenModal = () => {
   //   document.getElementById("my_modal_1").showModal();
   // };
+
+  const data = useLoaderData();
+  const userData = data.data.foundUserProfile;
+  console.log(userData);
 
   return (
     <section className='mb-4 md:flex md:justify-center md:pt-10 md:w-screen mb-6'>
