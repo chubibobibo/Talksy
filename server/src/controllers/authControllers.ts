@@ -5,14 +5,9 @@ import { UserModel } from "../Schema/UserSchema.js";
 import cloudinary from "cloudinary";
 import { promises as fs } from "fs";
 import { mailSender } from "../utils/emailSender.js";
-
-import sgMail from "@sendgrid/mail";
-// import dotenv from "dotenv";
-// import { createWelcomeEmailTemplate } from "./welcomeEmail.js";
-// dotenv.config();
-// if (process.env.TWILIO_API) {
-//   sgMail.setApiKey(process.env.TWILIO_API);
-// }
+// import { Types } from "mongoose";
+// import mongoose from "mongoose";
+import { types } from "util";
 
 interface UserModelInterface {
   username: string;
@@ -149,4 +144,23 @@ export const getLoggedUser = async (req: Request, res: Response) => {
     throw new ExpressError("User is not logged in", StatusCodes.UNAUTHORIZED);
   }
   res.status(StatusCodes.OK).json({ message: "logged user", loggedUser });
+};
+
+export const getLoaderUserData = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  if (!id) {
+    throw new ExpressError("User id does not exist", StatusCodes.NOT_FOUND);
+  }
+  // const userId = id;
+  // if (typeof userId === mongoose.Types.ObjectId) {
+  //   const validId = mongoose.Types.ObjectId.isValid(userId);
+  //   if (!validId) {
+  //     throw new ExpressError("Not a valid ID", StatusCodes.NOT_FOUND);
+  //   }
+  // }
+  const foundUserProfile = await UserModel.findById(id);
+  if (!foundUserProfile) {
+    throw new ExpressError("User cannot be found", StatusCodes.NOT_FOUND);
+  }
+  res.status(StatusCodes.OK).json({ message: "Found user", foundUserProfile });
 };

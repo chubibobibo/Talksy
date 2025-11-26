@@ -7,6 +7,7 @@ import {
   logoutUser,
   updateUser,
   getLoggedUser,
+  getLoaderUserData,
 } from "../controllers/authControllers.js";
 import passport from "passport";
 import { rateLimit } from "express-rate-limit";
@@ -32,6 +33,8 @@ const loginLimiter = rateLimit({
 
 // Get logged user
 router.get("/getLoggedUser", getLoggedUser);
+// get logged user for loader
+router.get("/getLoaderUserData/:id", getLoaderUserData);
 
 // Register route
 router.post("/register", registerValidation, registerUser);
