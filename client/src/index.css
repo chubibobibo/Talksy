@@ -8,6 +8,7 @@
   --font-poppins: "Poppins";
   --font-start: "Press Start 2P";
   --font-honk: "Honk";
+  --color-blue1: "bg-green-800";
 }
 
 /* Reusable Styling */
@@ -26,3 +27,7 @@
     @apply text-[1.6rem] text-blue-200 font-bold font-start md:text-[4rem];
   }
 }
+
+/* @utility btn-primary {
+  @apply blue;
+} */
